@@ -83,8 +83,8 @@ main {
     flex-direction: row;
     justify-content: center;
 }
-.container{
-    width: 100vw !important;
+.cont {
+    width: 90% !important;
 }
 .category-and-search {
     margin:25px 0 0 0;
@@ -278,60 +278,67 @@ footer img{
     background-color: #ff5596;
 }
 .containerDetails {
-    width: 85vw;
+    width: 80vw;
     padding:40px 0 0 0;
     
 
 }
 .boxDetails {
     display: flex;
-    justify-content:center;
+    justify-content:space-between;
     flex-wrap: wrap;
-    margin:0 0 40px 0
-
+    margin:0 0 0 0;
+    background-color:#f0f0f0;
+    border-radius: 10px;
+    box-shadow: 2px 2px 15px #2b2b2b5e;
+    min-height: 350px;
 }
 .imgDetails {
     object-fit:cover;
-    height: 300px;
-    width: 500px;
-    box-shadow: 2px 2px 5px #2b2b2b;
-    margin:0 0 20px 0;
+    height: auto;
+    width: 45%;
+    border-radius: 10px 0 0 10px
 }
 .infoDetails{
-    width: 400px;
-    padding:10px 20px 0 20px;
+    width: 55%;
+    flex-grow: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    padding: 10px;
 }
 .infoDetails h2 {
     color:#d90368;
     font-size: 3rem;
+    margin:10px 10px 0 10px;
+    
 }
 .infoDetails p {
-    padding:0 0 0 20px;
+    padding:15px;
     margin:0 0 20px 0
 }
 .dataDetails{
-    width: 100%;
-    background-color:#f0f0f0;
-    padding: 30px;
+    padding: 12px;
     display: flex;
     justify-content: space-around;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
-    border-radius: 5px;
     flex-wrap: wrap;
-    gap:30px
+    margin-top: -20px;
 }
 .dataDetails img{
-    height: 25px;
+    height: 20px;
+
 }
 .dataDetails p {
-    margin-top: 20px;
+    margin: 25px 15px 22px -13px;
+    font-size: 0.8rem;
+    padding:0 0 0 20px;
 }
 .dateDetails, .placeDetails, .priceDetails, .capacityDetails,.categoryDetails{
     display: flex;
-    gap:10px;
     justify-content: center;
     align-items: center;
-} 
+    
+}
 
 /* Personalizacion de la tabla */
 table {
@@ -366,8 +373,17 @@ table td {
     background-color: #00000023;
     padding:5px;
     border: 2px solid #fff;
-   
-
+}
+.searchFailed{
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+.searchFailed img{
+    width: 100px;
+}
+.searchFailed p  {
+    font-size: 2rem;
 }
 
 @media (max-width:960px) {
@@ -391,8 +407,9 @@ table td {
         width: 80vw;
     }
     .imgDetails {
-        width: 350px;
-        height: 200px;
+        width: 100%;
+        height: auto;
+        border-radius: 10px 10px 0 0;
     }
     .infoDetails h2 {
     color:#d90368;
@@ -403,8 +420,7 @@ table td {
     .card {
         width:280px !important;
     }
-    .imgDetails {
-        width: 280px;
-        height: 120px;
+    .infoDetails h2{
+        font-size: 2rem;
     }
 }

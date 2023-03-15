@@ -1,35 +1,127 @@
-//Separa los eventos futuros y los pasados:
-let eventosFuturos = []
-let eventosPasados = []
+//Separate past and future events
 
+const futureEvents = data.events.filter(cont => cont.date > data.currentDate)
 
-function eventosPasadosOFuturos(array){
-     for (let i = 0;i < array.length; i++){
-         if(data.currentDate > array[i].date){
-             eventosFuturos.push(array[i])
-         }
-         else{
-             eventosPasados.push(array[i])
-         }
-     }
-}
-
-eventosPasadosOFuturos(data.events)
-
-
-
-
-//Agrega los eventos futuros al Upcoming Events
+//DOM Capture
 
 const upcomingCards = document.getElementById('upcomingCards')
 
-function mostrarCards(array, contenedor){
-    let cards = ''
-    for(id of array){
-        cards += `<div class="card"> <img src ="${id.image}" alt = "..." > <div class="card-body row"> <h5 class="card-title">${id.name}</h5> <p class="card-text">${id.description}</p> <p>Price: $${id.price}</p> <a href="./details.html" class="btn btn-primary">Details</a> </div> </div >`
-     }
-     contenedor.innerHTML = cards
- }
 
-mostrarCards(eventosFuturos, upcomingCards)
+//---------Show categories dynamically-------------
 
+//Collect all categories, still repeated
+const categoriesGross = data.events.map(cont => {
+    return cont.category
+
+})
+
+
+//Filter out repeating items
+const categoriesNet = categoriesGross.filter((item, index) => {
+    return categoriesGross.indexOf(item) === index
+
+})
+
+// Add category item to page
+
+const categories = document.getElementById('categories')
+const insertCategories = categoriesNet.reduce((acc, atc) => {
+    return acc + `<li class="list-group-item">
+    <label>
+    <input class="form-check-input me-1" id="${[atc]}" name="${[atc]}" type="checkbox" value="" aria-label="...">
+    ${[atc]}
+    </label>
+    </li>
+    `
+}, "")
+
+categories.innerHTML = insertCategories
+
+
+//showCards
+
+function showCards(array) {
+    insertFilterCards = array.reduce((acc, atc) =>
+        acc + `<div class="card">
+            <img src ="${atc.image}" alt = "..." >
+            <div class="card-body row">
+            <h5 class="card-title">${atc.name}</h5>
+            <p class="card-text">${atc.description}</p>
+            <p>Price: $${atc.price}</p>
+            <a href="./details.html?id=${atc._id}" class="btn btn-primary">Details</a>
+            </div>
+            </div >`
+        , ""
+    )
+    upcomingCards.innerHTML = insertFilterCards
+}
+function noResults() {
+    upcomingCards.innerHTML = `<div class="searchFailed">
+                            <img src="./assets/searchX.png">
+                            <p>No search results</p>
+                            </div>`
+}
+
+// Checkbox filter
+
+let filterCategories = categoriesNet.map(cont => cont)
+
+
+filterCards = futureEvents.filter(cont => filterCategories.includes(cont.category))
+showCards(filterCards)
+
+categoriesNet.forEach(cont => {
+    const checkedBoxCategories = document.getElementById(cont)
+
+    checkedBoxCategories.addEventListener('change', (e) => {
+        e.preventDefault()
+        if (filterCategories.length == categoriesNet.length && checkedBoxCategories.checked) {
+            filterCategories = []
+        }
+        if (checkedBoxCategories.checked) {
+            filterCategories.push(cont)
+        }
+        else {
+            filterCategories = filterCategories.filter((item) => item !== cont)
+        }
+        if (filterCategories == 0) {
+            filterCategories = categoriesNet.map(cont => cont)
+            noResults()
+        }
+
+        filterCards = futureEvents.filter(cont => filterCategories.includes(cont.category))
+        showCards(filterCards)
+        if (text.length > 0) {
+            filterByText()
+        }
+    }
+    )
+}
+)
+
+
+// Search Form
+
+const searchForm = document.querySelector('form')
+let filterSearchCards
+let text
+function filterByText() {
+    filterSearchCards = filterCards.filter(cont =>
+        cont.name.toLowerCase().includes(text.toLowerCase())
+    )
+    if (filterSearchCards.length == 0) {
+        noResults()
+    }
+    else if (text.length == 0) {
+        showCards(filterCards)
+    }
+    else {
+        showCards(filterSearchCards)
+    }
+}
+
+searchForm.addEventListener('input', (e) => {
+    text = e.target.value
+    filterByText()
+}
+)
