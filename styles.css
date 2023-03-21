@@ -84,7 +84,7 @@ main {
     justify-content: center;
 }
 .cont {
-    width: 90% !important;
+    width: 93% !important;
 }
 .category-and-search {
     margin:25px 0 0 0;
@@ -141,7 +141,7 @@ main {
     gap:20px
 }
 .card {
-    width:235px !important;
+    width:250px !important;
     padding: 0;
     background-color:#f0f0f0;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.116);
@@ -374,6 +374,15 @@ table td {
     padding:5px;
     border: 2px solid #fff;
 }
+.th1{
+    width: 30%;
+}
+.th2{
+    width: 40%;
+}
+.th3{
+    width: 30%;
+}
 .searchFailed{
 display: flex;
 flex-direction: column;
@@ -422,5 +431,8 @@ align-items: center;
     }
     .infoDetails h2{
         font-size: 2rem;
+    }
+    table{
+        font-size: 0.6rem;
     }
 }
